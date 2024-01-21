@@ -1,4 +1,4 @@
-name = [["smithfield","tom"],["john","smith"],["bin","laden"],["saddam","hussein"],["suicide","bomber"]]
+name = [["Smithfield","Tom"],["John","Smith"],["David","Johnson"],["Emma","Jones"],["Christopher","Miller"]]
 score = [24,55,68,84,100]
 student = len(name)
 flag = True
