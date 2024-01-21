@@ -10,5 +10,6 @@ while flag:
             score[x],score[x+1] = score[x+1], score[x]
             name[x],name[x+1] = name[x+1],name[x]
             flag = True
-print(name)
-print(score)
+for index in range (student):
+    print(name[index])
+    print(score[index])
