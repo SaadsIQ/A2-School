@@ -1,4 +1,4 @@
-items = [1,53,62,67,86,42,7]
+items = [54,53,62,67,86,42,7]
 n = len(items)
 
 for index in range(1,n):
