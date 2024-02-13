@@ -6,7 +6,11 @@ for index in range(1,n):
     index2 = index - 1
     while index2 >= 0 and currentItem < items[index2]:
         items[index2 +1] = items[index2]
+        print("index2:", index2)
+
         index2 -=1
         items[index2 +1] = currentItem
+        print("currentItem", currentItem)
+
 
 print(items)
