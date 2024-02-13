@@ -9,4 +9,4 @@ for index in range(1,n):
         index2 -=1
         items[index2 +1] = currentItem
 
-print(items)
+#print(items)
