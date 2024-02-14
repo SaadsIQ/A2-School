@@ -14,6 +14,6 @@ print(stackFull)
 numPush = int(input("Enter the number of items to push: "))
 for _ in range(numPush):
     push()
-numPop = int(input("Enter the number of items to push: "))
+numPop = int(input("Enter the number of items to pop: "))
 for _ in range(numPop):
     pop()
