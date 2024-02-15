@@ -10,14 +10,13 @@ def push():
 
 def pop():
     global topPointer, basePointer,item, stackFull
-    if topPointer >= basePointer:
-        item = arr[topPointer]
+    if topPointer >= basePointer: #IF there are items in the array
         arr[topPointer] = None
         topPointer -= 1
         print("Popped item: ", item)
-    elif topPointer == basePointer-1:
+    elif topPointer == basePointer-1: #IF stack empty
         print("Stack empty")
-        
+
 arr = [None for index in range(0,int(input("Enter stack size: ")))]
 basePointer = 0
 topPointer = -1
