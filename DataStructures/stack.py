@@ -12,11 +12,13 @@ def pop():
     global topPointer, basePointer,item, stackFull
     if topPointer >= basePointer:
         item = arr[topPointer]
+        arr[topPointer] = None
         topPointer -= 1
         print("Popped item: ", item)
-        print(arr)
-
-arr = [None for index in range(0,10)]
+    elif topPointer == basePointer-1:
+        print("Stack empty")
+        
+arr = [None for index in range(0,int(input("Enter stack size: ")))]
 basePointer = 0
 topPointer = -1
 stackFull = len(arr)
