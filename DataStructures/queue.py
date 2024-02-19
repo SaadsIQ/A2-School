@@ -12,16 +12,19 @@ def enQueue():
 def deQueue():
     global arr, frontPointer, rearPointer, queueLength, queueSize, item
     if queueLength == 0:
-        print("Queue full cannot dequeue")
+        print("Queue empty cannot dequeue")
     else:
         item = arr[frontPointer]
         arr[frontPointer] = None
         frontPointer += 1
         queueLength -= 1
+        arr[:] = arr[frontPointer:]
+        frontPointer = 0
         print("Item dequeued: ", item)
         print(frontPointer)
         
 arr = [None for _ in range(0,int(input("Enter Queue size: ")))]
+print(arr)
 frontPointer = 0
 rearPointer = -1
 queueSize = len(arr)
