@@ -23,7 +23,6 @@ def deQueue():
         queueLength -= 1
         print("Item dequeued: ", item)
 
-
 arr = [None for _ in range(0,int(input("Enter Queue size: ")))]
 frontPointer = -1
 rearPointer = -1
