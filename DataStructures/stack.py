@@ -7,7 +7,6 @@ def push():
         print("Item pushed: ", item)
     else: 
         print("Stack full cannot push")
-
 def pop():
     global topPointer, basePointer,item, stackFull
     if topPointer >= basePointer: #IF there are items in the array
