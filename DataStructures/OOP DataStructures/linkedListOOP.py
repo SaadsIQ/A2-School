@@ -5,9 +5,19 @@ class Node:
 class linkedList:
     def __init__(self):
         self.head = None
-    def insert(self, value):
-        new_node = Node(value)
+    def insertAtStart(self, value):
         if self.head == None:
-            self.head = new_node
+            self.head = newNode
         else:
-            
+            newNode = Node(value)
+            newNode.next = self.head
+            self.head = newNode
+    def insertAtEnd(self, value):
+        newNode = Node(value)
+        if self.head == None:
+            self.head = newNode
+        else:
+            currentNode = self.head
+
+x = linkedList()
+x.insertAtStart(5)
