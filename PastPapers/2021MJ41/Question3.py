@@ -8,7 +8,7 @@ class TreasureChest:
         self.points = points
     #arrayTreasure(5) as treasureChest
 def readData():
-    FileName = "treasureChest.txt"
+    FileName = "TreasureChestData.txt"
     f = open(FileName,"r")
     arrayTreasure = []
     try: 
@@ -17,4 +17,8 @@ def readData():
             answer = file.readline().strip()
             points = file.readline().strip()
             arrayTreasure.append(TreasureChest(question, answer, points))
-        
+            return arrayTreasure
+    except:
+        return False
+
+readdata = readData()
