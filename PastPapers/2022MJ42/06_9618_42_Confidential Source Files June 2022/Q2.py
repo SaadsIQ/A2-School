@@ -15,10 +15,15 @@ print("///")
 printMethod()
 
 def BinarySearch(SearchArray, Lower, Upper, SearchValue):
-    if Upper>= Lower:
-        Mid = (lower+(upper-1))/2
-        if SearchArray[0,Mid] == SearchValue:
-            return middle
+    if Upper > Lower:
+        Mid = (Lower+(Upper-1))//2
+        if SearchArray[0][Mid] == SearchValue:
+            return Mid
         else:
-            if SearchArray[0,Mid] > SearchValue:
-                return BinarySearch(SearchArray, Lower)
+            if SearchArray[0][Mid] > SearchValue:
+                return BinarySearch(SearchArray, Lower, Mid-1, SearchValue)
+            else:
+                return BinarySearch(SearchArray, Mid+1, Upper, SearchValue)
+    return -1
+SearchValue = int(input("Enter a value:"))
+print(BinarySearch(arrayData,0,arrayLength-1,SearchValue))
