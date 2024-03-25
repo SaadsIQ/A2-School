@@ -2,9 +2,10 @@ import random
 arrayLength = 10
 arrayData = [[random.randint(0,100)for i in range(arrayLength)]for j in range(arrayLength)]
 def printMethod():
-    global arrayData
-    for i in arrayData:
-        print(i)
+    for x in range(0, 10):
+        for y in range(0, 10):
+            print(arrayData[x][y], " ", end='')
+        print("") 
 printMethod()
 for x in range(0,arrayLength):
     for y in range(0,arrayLength):
@@ -15,8 +16,8 @@ print("///")
 printMethod()
 
 def BinarySearch(SearchArray, Lower, Upper, SearchValue):
-    if Upper > Lower:
-        Mid = (Lower+(Upper-1))//2
+    if Upper >= Lower:
+        Mid = (Lower+(Upper+1))//2
         if SearchArray[0][Mid] == SearchValue:
             return Mid
         else:
