@@ -19,6 +19,7 @@ def chooseCard():
             print("Number must be between 1 and 30")
         elif NumberChosen[userCard-1]:
             
+
 filename = "CardValues.txt"
 try:
     with open(filename,"r") as File:
