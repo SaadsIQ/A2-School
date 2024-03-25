@@ -13,7 +13,7 @@ def Push(userInput):
 def Pop():
     global StackData, StackPointer
     if StackPointer == 0:
-        Return -1
+        return -1
     elif StackPointer <= maxStack:
         StackPointer -=1
         valueTop = StackData[StackPointer]
