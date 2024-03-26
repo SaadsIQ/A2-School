@@ -25,7 +25,7 @@ def chooseCard():
             print("Card chosen: ", userCard)
             flagContinue = False
             NumberChosen[userCard-1] = True
-    return userCard-1
+    return userCard - 1
 
 filename = "CardValues.txt"
 try:
