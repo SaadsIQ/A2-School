@@ -1,5 +1,3 @@
-
-
 class card:
     #Number as Integer
     #Colour as String
