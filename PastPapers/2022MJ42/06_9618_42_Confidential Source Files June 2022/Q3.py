@@ -12,6 +12,7 @@ class card:
         return self.__Colour
 
 cardArray = [0 for i in range (30)]
+
 def chooseCard():
     global NumberChosen
     flagContinue = True
