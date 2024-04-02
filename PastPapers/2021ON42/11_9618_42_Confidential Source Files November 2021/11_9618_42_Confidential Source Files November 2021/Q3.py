@@ -38,3 +38,12 @@ FreeNode = 0 #integer
 for x in range (10):
     ArrayNode,RootPointer,FreeNode = AddNode(ArrayNode, RootPointer, FreeNode)
 printAll(ArrayNode)
+
+def inOrder(ArrayNode, RootNode):
+    if ArrayNode[RootNode][0] != -1:
+        inOrder(ArrayNode, ArrayNode[RootNode][0])
+    print(str(ArrayNode[RootNode][1]))
+    if ArrayNode[RootNode][2]!= -1:
+        inOrder(ArrayNode,ArrayNode[RootNode][2])
+
+inOrder(ArrayNode,RootPointer)
