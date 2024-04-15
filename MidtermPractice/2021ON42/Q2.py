@@ -50,11 +50,3 @@ for x in range(NumberPicturesInArray):
         if PictureArray[x].GetWidth() <= userWidth:
             if PictureArray[x].GetHeight() <= userHeight:
                 print(PictureArray[x].GetDescription(),PictureArray[x].GetWidth(),PictureArray[x].GetHeight(),PictureArray[x].GetColour())
-
-
-for x in range(NumberPicturesInArray):
-    if PictureArray[x].GetColour() == usercolor:
-        if PictureArray[x].GetWidth() <= userWidth:
-            if PictureArray[x].GetHeight() <= userHeight:
-                print(PictureArray[x].GetDescription(), PictureArray[x].GetWidth(), PictureArray[x].GetHeight())
-
