@@ -1,3 +1,9 @@
+arr = [None for index in range(0,int(input("Enter stack size: ")))]
+basePointer = 0
+topPointer = -1
+stackFull = len(arr)
+item = None
+
 def push():
     global topPointer, item, arr, stackFull
     if topPointer < stackFull-1:
@@ -15,12 +21,6 @@ def pop():
         print("Popped item: ", item)
     elif topPointer == basePointer-1: #IF stack empty
         print("Stack empty")
-
-arr = [None for index in range(0,int(input("Enter stack size: ")))]
-basePointer = 0
-topPointer = -1
-stackFull = len(arr)
-item = None
 
 numPush = int(input("Enter the number of items to push: "))
 for _ in range(numPush):
