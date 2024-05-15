@@ -30,14 +30,14 @@ Filename = "Employees.txt"
 temp = ""
 try:
     with open(Filename,"r") as File:
-        for line in File:
+        for line in range(8):
             hourlyPay = float(File.readline())
-            employeeNumber = int(File.readline())
-            temp = File.readline()
+            employeeNumber = int(File.readline().strip())
+            temp = File.readline().strip()
             try: 
                 bonus = float(temp)
                 title = File.readline().strip()
-                Employee.append(Manager(hourlyPay,employeeNumber,title,bonus))
+                EmployeeArray.append(Manager(hourlyPay,employeeNumber,title,bonus))
             except:
                 title = temp
                 EmployeeArray.append(Employee(hourlyPay,employeeNumber,title))
