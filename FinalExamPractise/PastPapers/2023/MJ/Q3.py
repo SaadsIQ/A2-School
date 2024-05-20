@@ -1,25 +1,22 @@
 class Employee:
     def __init__(self,hourlyPay,employeeNumber,jobTitle):
         self.__HourlyPay = hourlyPay #REAL
-        self.__EmployeeNumber : employeeNumber #STRING
+        self.__EmployeeNumber = employeeNumber #STRING
         self.__Jobtitle = jobTitle #STRING
-        self.__PayYear2022 = [] #Array 52 elements float
-        for _ in range(0,52):
-            self.__PayYear2022[_] = 0.0
+        self.__PayYear2022 = [0.00]*52 #Array 52 elements float
+        
     def GetEmployeeNumber(self):
         return self.__EmployeeNumber
+    
     def SetPay(self,weekNumber,hoursWorked):
-        payForWeek = self.__HourlyPay * hoursWorked
-        self.__PayYear2022[weekNumber] = payForWeek
+        self.__PayYear2022[weekNumber-1]=hoursWorked * self.__HourlyPay
+
     def GetTotalPay(self):
-        total = 0
-        for index in range(0,52):
-            total = total + self.__PayYear2022[index]
-        return total
+        return sum(self.__PayYear2022)
 
 class Manager(Employee):
-    def __init__(self,bonusValue,hourlyPay,employeeNumber,jobTitle):
-        super().__init__(employeeNumber,hourlyPay,jobTitle)
+    def __init__(self,hourlypay,employeeNumber,jobTitle,bonusValue):
+        super().__init__(hourlyPay,employeeNumber,jobTitle)
         self.__BonusValue = bonusValue
     def SetPay(self, weekNumber, hoursWorked):
         hoursWorked = hoursWorked + ((self.__BonusValue/100)*hoursWorked)
@@ -32,16 +29,16 @@ try:
     with open(Filename,"r") as File:
         for line in range(8):
             hourlyPay = float(File.readline())
-            employeeNumber = int(File.readline().strip())
+            employeeNumber = File.readline().strip()
             temp = File.readline().strip()
             try: 
                 bonus = float(temp)
                 title = File.readline().strip()
                 EmployeeArray.append(Manager(hourlyPay,employeeNumber,title,bonus))
-            except:
+            except ValueError:
                 title = temp
                 EmployeeArray.append(Employee(hourlyPay,employeeNumber,title))
-    File.close()
+    
 except FileNotFoundError:
     print("file not found")
 
@@ -49,16 +46,15 @@ def EnterHours():
     Filename = "HoursWeek1.txt"
     try:
         with open(Filename,"r") as File:
-            for line in File:
-                EmployeeNumber = int(File.readline())
-                hoursworked = float(File.readline().strip())
-                for i in range(0,8):
-                    if Employee[i].GetEmployeeNumber() == EmployeeNumber:
-                        Employee[i].SetPay(1,hoursworked)
-        File.Close()
+            for _ in range(8):
+                EmpID = File.readline().strip()
+                for i in EmployeeArray:
+                    if i.GetEmployeeNumber() == EmpID:
+                        i.SetPay(1,float(File.readline()))
+        File.close()
     except FileNotFoundError:
         print("File not found")
 
 EnterHours()
-for i in range(0,8):
-    print("Employee number: ",Employee[i].GetEmployeeNumber(),"Employee pay",Employee[i].GetTotalPay())
+for i in EmployeeArray:
+    print(i.GetEmployeeNumber()," ",i.GetTotalPay())
