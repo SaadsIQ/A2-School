@@ -24,7 +24,7 @@ def readData():
     FileName = "TreasureChestData.txt"
     arrayTreasure = []
     try:
-        with open(FileName, "r") as file:
+        with open(FileName, "r") as File:
             for line in File:
                 question = line.strip()
                 answer = File.readline().strip()

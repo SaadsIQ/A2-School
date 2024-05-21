@@ -21,3 +21,5 @@ def postOrder(RootNode):
     if RootNode[2] !=-1:
         postOrder(arrayNodes[RootNode[2]])
     print(str(RootNode[1]))
+
+
