@@ -925,6 +925,143 @@ llist.insertAtBeginning(5)
 llist.insertAtEnd(30)
 llist.display()
 
+# Linked list alt
+class LinkedListNode:
+    def __init__(self, data=None, next_index=None):
+        self.data = data
+        self.next_index = next_index
+
+class LinkedList:
+    def __init__(self, size):
+        self.my_linked_list = [LinkedListNode() for _ in range(size)]
+        self.start_pointer = -1
+        self.heap_start_pointer = 0
+
+    def add_node_after(self, data, target_index):
+        if self.heap_start_pointer < len(self.my_linked_list):
+            new_index = self.heap_start_pointer
+            self.heap_start_pointer += 1
+
+            new_node = LinkedListNode(data)  # Set data for the new node
+
+            if target_index == -1:
+                # Insert at the beginning
+                new_node.next_index = self.start_pointer
+                self.start_pointer = new_index
+            else:
+                # Insert after the target node
+                new_node.next_index = self.my_linked_list[target_index].next_index
+                self.my_linked_list[target_index].next_index = new_index
+
+            # Set data explicitly
+            self.my_linked_list[new_index] = new_node
+
+            return True
+        else:
+            print("Error: No more space in the heap.")
+            return False
+
+    def delete_node(self, target_index):
+        if 0 <= target_index < len(self.my_linked_list):
+            if target_index == self.start_pointer:
+                # Deleting the first node
+                self.start_pointer = self.my_linked_list[target_index].next_index
+            else:
+                # Deleting a non-first node
+                prev_index = self.find_previous_index(target_index)
+                if prev_index is not None:
+                    self.my_linked_list[prev_index].next_index = self.my_linked_list[target_index].next_index
+
+            # Reset the deleted node and move it to the heap
+            self.my_linked_list[target_index] = LinkedListNode(next_index=self.heap_start_pointer)
+            self.heap_start_pointer = target_index
+
+            return True
+        else:
+            print("Error: Invalid target index.")
+            return False
+
+    def find_previous_index(self, target_index):
+        current_index = self.start_pointer
+        prev_index = None
+        while current_index is not None and current_index != target_index:
+            if current_index < 0 or current_index >= len(self.my_linked_list):
+                break
+            prev_index = current_index
+            current_index = self.my_linked_list[current_index].next_index
+        return prev_index
+
+    def update_pointers(self):
+        self.my_linked_list_pointers = []
+        current_index = self.start_pointer
+        while current_index is not None:
+            self.my_linked_list_pointers.append(current_index)
+            current_index = self.my_linked_list[current_index].next_index
+
+    def print_linked_list(self):
+        current_index = self.start_pointer
+        while current_index is not None:
+            new_node = self.my_linked_list[current_index]
+            print(f"Index: {current_index}, Data: {new_node.data}, Next Index: {new_node.next_index}")
+            current_index = new_node.next_index
+
+# Example usage:
+linked_list_size = 12
+my_linked_list = LinkedList(linked_list_size)
+
+# Add nodes
+my_linked_list.add_node_after(42, -1)  # Add at the beginning
+my_linked_list.add_node_after(13, 0)   # Add after the first node
+my_linked_list.add_node_after(7, 1)    # Add after the second node
+
+# Print the linked list
+print("Linked List after adding nodes:")
+my_linked_list.print_linked_list()
+
+# Delete a node
+my_linked_list.delete_node(1)
+
+# Print the linked list after deletion
+print("\nLinked List after deleting a node:")
+my_linked_list.print_linked_list()
+
+# Print pointers
+print("\nPointers:")
+my_linked_list.update_pointers()
+print(my_linked_list.my_linked_list_pointers)
+
+
+'''
+LinkedListNode class:
+
+This class defines a node in a linked list.
+Each node contains two attributes:
+data: Holds the actual data stored in the node. It defaults to None if not explicitly provided during node creation.
+next_index: Stores the index of the next node in the linked list. It defaults to None if not explicitly provided.
+LinkedList class:
+
+This class represents a linked list data structure.
+It initializes with a fixed size and creates an array of LinkedListNode objects based on that size.
+Attributes:
+my_linked_list: An array representing the linked list. Each element is a LinkedListNode object.
+start_pointer: Points to the first node in the linked list. It's initialized to -1, indicating an empty list.
+heap_start_pointer: Points to the start of the heap where deleted nodes are stored for reuse.
+Methods:
+
+add_node_after(data, target_index): Adds a new node with the specified data after the node at the target index. If the target index is -1, the new node is inserted at the beginning of the list.
+delete_node(target_index): Deletes the node at the specified index from the linked list. It also moves the deleted node to the heap for potential reuse.
+find_previous_index(target_index): Helper method to find the index of the node preceding the node at the target index.
+update_pointers(): Updates the list of pointers to all nodes in the linked list.
+print_linked_list(): Prints the data and next index of each node in the linked list.
+Example Usage:
+
+Creates an instance of LinkedList with a specified size.
+Adds nodes to the linked list using add_node_after().
+Prints the linked list using print_linked_list().
+Deletes a node using delete_node().
+Prints the updated linked list and pointers
+'''
+
 #binary tree
 class TreeNode:
     def __init__(self, key):
@@ -1477,3 +1614,147 @@ def EnterHours():
 EnterHours()
 for i in EmployeeArray:
     print(i.GetEmployeeNumber()," ",i.GetTotalPay())
+
+# Vehicle paper // inheritance 
+# Vehicle
+class Vehicle:
+    def __init__(self,ID,MaxSpeed,IncreaseAmmount):
+        self.__ID = ID #STRING
+        self.__MaxSpeed = MaxSpeed #INTEGER
+        self.__IncreaseAmmount = IncreaseAmmount #INTEGER
+        self.__CurrentSpeed = 0 #INTEGER
+        self.__HorizontalPosition = 0 #INTEGER
+    def GetCurrentSpeed(self):
+        return self.__CurrentSpeed
+    def GetIncreaseAmmount(self):
+        return self.__IncreaseAmmount
+    def GetMaxSpeed(self):
+        return self.__MaxSpeed
+    def GetHorizontalPosition(self):
+        return self.__HorizontalPosition
+    def SetCurrentSpeed(self,CurrentSpeed):
+        self.__CurrentSpeed = CurrentSpeed
+    def SetHorizontalPosition(self,HorizontalPosition):
+        self.__HorizontalPosition = HorizontalPosition
+    
+    def IncreaseSpeed(self):
+        self.__CurrentSpeed = self.__CurrentSpeed +self.__IncreaseAmmount
+        if self.__CurrentSpeed > self.__MaxSpeed:
+            self.__CurrentSpeed = self.__MaxSpeed
+        self.__HorizontalPosition = self.__HorizontalPosition + self.__CurrentSpeed
+    def OutputValues(self):
+        print("Current position = ", Vehicle.GetHorizontalPosition(self))
+        print("Current speed = ", Vehicle.GetCurrentSpeed(self))
+        
+
+class Helicopter(Vehicle):
+    def __init__(self,ID,Maxspeed,IncreaseAmmount,VerticalChange,MaximumHeight):
+        super().__init__(ID,Maxspeed,IncreaseAmmount)
+        self.__VerticalPositon = 0 #INTEGER
+        self.__VerticalChange = VerticalChange #INTEGER
+        self.__MaximumHeight = MaximumHeight #INTEGER
+    def IncreaseSpeed(self):
+        self.__VerticalPositon = self.__VerticalPositon + self.__VerticalChange
+        if self.__VerticalPositon > self.__MaximumHeight:
+            self.__VerticalPositon = self.__MaximumHeight
+        super().SetCurrentSpeed(self,(Vehicle.GetCurrentSpeed(self) + Vehicle.GetIncreaseAmmount(self)))
+        if Vehicle.GetCurrentSpeed(self) > Vehicle.GetMaxSpeed(self):
+            Vehicle.SetCurrentSpeed(self,Vehicle.GetMaxSpeed(self))
+    def OutputValues(self):
+        print("Current position = ", Vehicle.GetHorizontalPosition(self))
+        print("Current speed = ", Vehicle.GetCurrentSpeed(self))
+        print("Vertical position = ",self.__VerticalPositon)
+
+Car = Vehicle("Tiger",100,20)
+Heli = Helicopter("Lion",350,40,3,100)
+Car.IncreaseSpeed()
+Car.IncreaseSpeed()
+Car.OutputValues()
+Heli.IncreaseSpeed()
+Heli.IncreaseSpeed()
+Heli.OutputValues()
+
+# stack
+global Animal #ARRAY 20 ELEMENTS OF STRING
+global Colour #ARAY 10 ELEMENTS OF STIRNG
+Animal = [None for i in range(20)] #ARRAY 20 ELEMENTS OF STRING
+Colour = [None for i in range(10)] #ARAY 10 ELEMENTS OF STIRNG
+AnimalTopPointer = 0 #INTEGER
+ColourTopPointer = 0 #INTEGER
+
+def PushAnimal(DataToPush):
+    global Animal, AnimalTopPointer
+    if AnimalTopPointer == 20:
+        return False
+    else:
+        Animal[AnimalTopPointer] = DataToPush
+        AnimalTopPointer += 1
+        return True
+
+def PopAnimal():
+    global AnimalTopPointer,Animal
+    ReturnData = ""
+    if AnimalTopPointer == 0:
+        return ""
+    else:
+        ReturnData = Animal[AnimalTopPointer-1]
+        Animal[AnimalTopPointer-1] = None
+        AnimalTopPointer -= 1
+        return ReturnData
+    
+def readData():
+    FileName = "AnimalData.txt"
+    FileName2 = "ColourData.txt"
+    try:
+        with open(FileName,"r") as File:
+            for line in File:
+                DataToPush = line.strip()
+                PushAnimal(DataToPush)
+    except FileNotFoundError:
+        print("File not found")
+    try:
+        with open(FileName2,"r") as File2:
+            for line2 in File2:
+                DataToPush2 = line2.strip()
+                PushColour(DataToPush2)
+    except FileNotFoundError:
+        print("File not found")
+def PushColour(DataToPush):
+    global Colour,ColourTopPointer
+    if ColourTopPointer == 10:
+        return False
+    else:
+        Colour[ColourTopPointer] = DataToPush
+        ColourTopPointer += 1
+        return True
+
+def PopColour():
+    global Colour, ColourTopPointer
+    ReturnValue = ""
+    if ColourTopPointer == 0:
+        return ReturnValue
+    else: 
+        ReturnValue = Colour[ColourTopPointer-1]
+        ColourTopPointer -=1
+        return ReturnValue
+
+def OutputItem():
+    global Animal, Colour, AnimalTopPointer, ColourTopPointer
+    animalPopped = PopAnimal()
+    colourPopped = PopColour()
+    if colourPopped == "":
+        PushAnimal(animalPopped)
+        print("No Colour")
+    elif animalPopped == "":
+        PushColour(colourPopped)
+        print("No animal")
+    else:
+        print(colourPopped, animalPopped)
+
+print(Animal)
+print(Colour)
+readData()
+OutputItem()
+OutputItem()
+OutputItem()
+OutputItem()
