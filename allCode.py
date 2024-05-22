@@ -836,6 +836,182 @@ myLinkedList.output_nodes()
 myLinkedList.addNode()
 myLinkedList.output_nodes()
 
+#Linked list all operations
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insertAtBeginning(self, data):
+        newNode = Node(data)
+        newNode.next = self.head
+        self.head = newNode
+
+    def insertAtEnd(self, data):
+        newNode = Node(data)
+        if self.head is None:
+            self.head = newNode
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = newNode
+
+    def insertAtIndex(self, index, data):
+        if index < 0:
+            print("Index not valid")
+            return
+        newNode = Node(data)
+        if index == 0:
+            newNode.next = self.head
+            self.head = newNode
+            return
+        current = self.head
+        currentIndex = 0
+        prev = None
+        while current is not None and currentIndex < index:
+            prev = current
+            current = current.next
+            currentIndex += 1
+        if currentIndex == index:
+            prev.next = newNode
+            newNode.next = current
+        else:
+            print("Out of bounds")
+
+    def deleteNode(self, key):
+        temp = self.head
+        if temp is not None:
+            if temp.data == key:
+                self.head = temp.next
+                temp = None
+                return
+        prev = None
+        while temp is not None:
+            if temp.data == key:
+                break
+            prev = temp
+            temp = temp.next
+        if temp is None:
+            print("Key not found")
+            return
+        prev.next = temp.next
+        temp = None
+
+    def search(self, key):
+        current = self.head
+        while current:
+            if current.data == key:
+                return True
+            current = current.next
+        return False
+
+    def display(self):
+        elements = []
+        current = self.head
+        while current:
+            elements.append(current.data)
+            current = current.next
+        print("Linked list contains:", elements)
+
+llist = LinkedList()
+llist.insertAtBeginning(10)
+llist.insertAtEnd(100)
+llist.insertAtBeginning(5)
+llist.insertAtEnd(30)
+llist.display()
+
+#binary tree
+class TreeNode:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BinaryTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        self.root = self._insert(self.root, key)
+
+    def _insert(self, root, key):
+        if root is None:
+            return TreeNode(key)
+
+        if key < root.key:
+            root.left = self._insert(root.left, key)
+        elif key > root.key:
+            root.right = self._insert(root.right, key)
+
+        return root
+
+    def _print_tree(self, root, level, prefix):
+        if root is not None:
+            self._print_tree(root.right, level + 1, "R")
+            print("  " * level + f"{prefix} -> {root.key}")
+            self._print_tree(root.left, level + 1, "L")
+
+    def _pre_order(self, root):
+        if root:
+            print(root.key, end=" ")
+            self._pre_order(root.left)
+            self._pre_order(root.right)
+
+    def _post_order(self, root):
+        if root:
+            self._post_order(root.left)
+            self._post_order(root.right)
+            print(root.key, end=" ")
+
+    def _in_order(self, root):
+        if root:
+            self._in_order(root.left)
+            print(root.key, end=" ")
+            self._in_order(root.right)
+
+    def print_tree(self):
+        print("Tree:")
+        self._print_tree(self.root, 0, "Root")
+
+    def pre_order(self):
+        print("Pre-order Traversal:")
+        self._pre_order(self.root)
+        print()
+
+    def post_order(self):
+        print("Post-order Traversal:")
+        self._post_order(self.root)
+        print()
+
+    def in_order(self):
+        print("In-order Traversal:")
+        self._in_order(self.root)
+        print()
+
+# Example usage:
+binary_tree = BinaryTree()
+
+# Insert nodes
+binary_tree.insert(5)
+binary_tree.insert(3)
+binary_tree.insert(7)
+binary_tree.insert(2)
+binary_tree.insert(4)
+
+# Print the tree
+binary_tree.print_tree()
+
+# Print traversals
+binary_tree.pre_order()
+binary_tree.post_order()
+binary_tree.in_order()
+
+
 # Treasure chest
 class TreasureChest:
     def __init__(self, question, answer, points):
