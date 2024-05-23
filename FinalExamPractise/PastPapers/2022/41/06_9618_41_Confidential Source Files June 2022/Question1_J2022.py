@@ -86,3 +86,9 @@ while not (1 <= user_score <= 100000):
 file_data = arrange_high_scores(file_data, username, user_score)
 output_high_scores(file_data)
 
+def writeTopten():
+    filename = open("NewHighScore.txt","w")
+    for x in range(10):
+        filename.write(str(FileData[x][0])+"\n")
+        filename.write(str(FileData[x][1])+"\n")
+        filename.close()

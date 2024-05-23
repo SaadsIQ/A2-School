@@ -1618,33 +1618,64 @@ for i in EmployeeArray:
 # Vehicle paper // inheritance 
 # Vehicle
 class Vehicle:
-    def __init__(self,ID,MaxSpeed,IncreaseAmmount):
-        self.__ID = ID #STRING
-        self.__MaxSpeed = MaxSpeed #INTEGER
-        self.__IncreaseAmmount = IncreaseAmmount #INTEGER
-        self.__CurrentSpeed = 0 #INTEGER
-        self.__HorizontalPosition = 0 #INTEGER
+    def __init__(self, ID, MaxSpeed, IncreaseAmount):
+        self._ID = ID  # Changed to protected
+        self._MaxSpeed = MaxSpeed  # Changed to protected
+        self._IncreaseAmount = IncreaseAmount  # Changed to protected
+        self._CurrentSpeed = 0  # Changed to protected
+        self._HorizontalPosition = 0  # Changed to protected
+
     def GetCurrentSpeed(self):
-        return self.__CurrentSpeed
-    def GetIncreaseAmmount(self):
-        return self.__IncreaseAmmount
+        return self._CurrentSpeed
+
+    def GetIncreaseAmount(self):
+        return self._IncreaseAmount
+
     def GetMaxSpeed(self):
-        return self.__MaxSpeed
+        return self._MaxSpeed
+
     def GetHorizontalPosition(self):
-        return self.__HorizontalPosition
-    def SetCurrentSpeed(self,CurrentSpeed):
-        self.__CurrentSpeed = CurrentSpeed
-    def SetHorizontalPosition(self,HorizontalPosition):
-        self.__HorizontalPosition = HorizontalPosition
-    
+        return self._HorizontalPosition
+
+    def SetCurrentSpeed(self, CurrentSpeed):
+        self._CurrentSpeed = CurrentSpeed
+        if self._CurrentSpeed > self._MaxSpeed:
+            self._CurrentSpeed = self._MaxSpeed
+        self._HorizontalPosition += self._CurrentSpeed
+
     def IncreaseSpeed(self):
-        self.__CurrentSpeed = self.__CurrentSpeed +self.__IncreaseAmmount
-        if self.__CurrentSpeed > self.__MaxSpeed:
-            self.__CurrentSpeed = self.__MaxSpeed
-        self.__HorizontalPosition = self.__HorizontalPosition + self.__CurrentSpeed
+        self.SetCurrentSpeed(self._CurrentSpeed + self._IncreaseAmount)
+
     def OutputValues(self):
-        print("Current position = ", Vehicle.GetHorizontalPosition(self))
-        print("Current speed = ", Vehicle.GetCurrentSpeed(self))
+        print("Current position = ", self.GetHorizontalPosition())
+        print("Current speed = ", self.GetCurrentSpeed())
+
+class Helicopter(Vehicle):
+    def __init__(self, ID, MaxSpeed, IncreaseAmount, VerticalChange, MaximumHeight):
+        super().__init__(ID, MaxSpeed, IncreaseAmount)
+        self._VerticalPosition = 0  # Changed to protected
+        self._VerticalChange = VerticalChange  # Changed to protected
+        self._MaximumHeight = MaximumHeight  # Changed to protected
+
+    def IncreaseSpeed(self):
+        self._VerticalPosition += self._VerticalChange
+        if self._VerticalPosition > self._MaximumHeight:
+            self._VerticalPosition = self._MaximumHeight
+        super().IncreaseSpeed()
+
+    def OutputValues(self):
+        super().OutputValues()
+        print("Vertical position = ", self._VerticalPosition)
+
+# Example usage
+Car = Vehicle("Tiger", 100, 20)
+Heli = Helicopter("Lion", 350, 40, 3, 100)
+Car.IncreaseSpeed()
+Car.IncreaseSpeed()
+Car.OutputValues()
+Heli.IncreaseSpeed()
+Heli.IncreaseSpeed()
+Heli.OutputValues()
         
 
 class Helicopter(Vehicle):
@@ -1758,3 +1789,113 @@ OutputItem()
 OutputItem()
 OutputItem()
 OutputItem()
+
+#balloon paper
+
+#Score arrange sort
+def read_high_scores(filename="HighScore.txt"):
+    data = []
+    try:
+        with open(filename, "r") as file:
+            lines = file.readlines()
+            for i in range(0, len(lines), 2):
+                name = lines[i].strip()
+                score = lines[i + 1].strip()
+                data.append([name, int(score)])
+    except FileNotFoundError:
+        print("File not found")
+    return data
+
+def output_high_scores(data):
+    for name, score in data:
+        print(name, score)
+
+def arrange_high_scores(data, username, score):
+    data.append([username, score])
+    data.sort(key=lambda x: x[1], reverse=True)  # Sort descending by score
+    if len(data) > 10:
+        data.pop()  # Keep only the top 10
+    return data
+
+
+file_data = read_high_scores()
+output_high_scores(file_data)
+
+username = input("Enter a user name: ")
+while len(username) != 3:
+    username = input("Please enter a 3-letter user name: ")
+    
+user_score = int(input("Enter your score: "))
+while not (1 <= user_score <= 100000):
+    user_score = int(input("Enter a valid score (1-100000): "))
+
+file_data = arrange_high_scores(file_data, username, user_score)
+output_high_scores(file_data)
+
+def writeTopten():
+    filename = open("NewHighScore.txt","w")
+    for x in range(10):
+        filename.write(str(FileData[x][0])+"\n")
+        filename.write(str(FileData[x][1])+"\n")
+        filename.close()
+
+# alt score
+def ReadHighScores():
+    global FileData
+    FileName = "HighScore.txt"
+    try:
+        with open(FileName,"r") as File:
+            for x in range(11):
+                FileData[x][0] = File.readline().strip()
+                FileData[x][1] = File.readline().strip()
+    except FileNotFoundError:
+        print("File not found")
+
+def OutputHighScores():
+    global FileData
+    for  i in range(0,len(FileData)):
+        print(FileData[i][0], FileData[i][1])
+
+ReadHighScores()
+OutputHighScores()
+
+userName = input("Enter a user name: ")
+while len(userName) != 3:
+    userName = input("Enter a user name: ")
+userScore = int(input("Enter your score: "))
+while int(userScore) <1 or int(userScore) >100000:
+    userScore = int(input("Enter your score: "))
+# balloon
+class Balloon:
+    def __init__(self, DefenceItem, Colour):
+        self.__DefenceItem = DefenceItem #STRING
+        self.__Colour = Colour #STRING
+        self.__Health = 100 #INTEGER
+    def GetDefenceItem(self):
+        return self.__DefenceItem
+    def ChangeHealth(self, change):
+        self.__Health = self.__Health + change
+    def CheckHealth(self):
+        if self.__Health <=0:
+            return True
+        else:
+            return False
+        
+#main
+userDefenceItem = input("Enter a defence item: ")
+userBalloonColour = input("Enter a balloon colour: ")
+Balloon1 = Balloon(userDefenceItem,userBalloonColour)
+
+def Defend(myBalloon):
+    opponentStrength = int(input("Enter opponenet stength: "))
+    myBalloon.ChangeHealth(-opponentStrength)
+    print("You defended with",str(myBalloon.GetDefenceItem()))
+    if myBalloon.CheckHealth():
+        print("No health remaining")
+    else:
+        print("Defence succeeded")
+    return myBalloon
+
+
+Defend(Balloon1)
+
